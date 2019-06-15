@@ -1,0 +1,42 @@
+
+<div class="container" style="padding-top:10px">
+  <div class="row"><h3 class='seach-title'>Youtube Audio Player !</h3></div>
+  <div class='row'>
+    <form  #crisisForm="ngForm">
+      <div class="col-sm-9">
+        <div class="form-group">
+          <input [(ngModel)]='keyword' placeholder="search keyword" name='keyword' type="text" class="form-control" id="search">
+        </div>
+      </div>
+    </form>
+    <div class="col-sm-3" style='text-align:left'>
+        <button type="submit" (click)='getSearch()' class="btn-lg">serach</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class='row' *ngIf='data.length!= 0'>
+        <p style='font-style:italic;font-size:16px;color:red !important'>
+            Your Search Keyword is {{_keyword}}
+              the result found is {{data.length}}
+         </p>
+      <div class="col-lg-3 col-sm-6 col-xs-12 " *ngFor='let item of data'>
+        <div class='item' style='background-color:#efefef;padding:5px'>
+          <div>
+            {{item.snippet.title | slice:0:20}}...
+          </div>
+          <a (click)="showWindow(item.id.videoId)" href="javascript:void(0)" id='item-link' style='dispaly:block' target='_blank' title='{{item.snippet.title}}'>
+          <img src='{{item.snippet.thumbnails.medium.url}}'/>
+        </a>
+        </div>
+      </div>
+    </div>
+    <div class='row' *ngIf='data.length == 0'>
+        <span>No search result found ! </span>
+        <p style='font-color:blue;font-style:italic'>
+            Your Search Keyword is {{_keyword}}
+              the result found is {{data.length}}
+         </p>
+    </div>
+  </div>
